@@ -56,7 +56,7 @@
     <div class="overlay"></div>
     <img src="image/tri.png" alt="Logo" class="logo">
     <div class="content">
-        <h1>Website Under Development</h1>
+        <h1 id="headline">Website Under <span id="typewriter">Development</span></h1>
         <div class="progress-bar-container">
             <div id="progress-bar" class="progress-bar">0%</div>
         </div>
@@ -64,8 +64,52 @@
     </div>
 
 
+    <div class="whatsapp-container">
+        <a href="https://wa.link/xdd432" target="_blank" class="whatsapp-btn">
+          <img src="image/whatsapp-icon.png" alt="WhatsApp Icon" class="icon">
+        </a>
+    </div>
+
+
 
     <style>
+
+
+        /*==========Whatsapp Icon=========*/
+
+
+    .whatsapp-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+    
+    .whatsapp-btn {
+        display: block;
+        width: 60px;
+        height: 60px;
+        background-color: #107f39;
+        border-radius: 50%;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        animation: blink 1s infinite alternate;
+    }
+    
+    .icon {
+        width: 40px;
+        height: 40px;
+        margin-top: 10px;
+    }
+    
+    @keyframes blink {
+        from {
+        opacity: 1;
+        }
+        to {
+        opacity: 0.5;
+        }
+    }
 
 body, html {
             margin: 0;
@@ -94,16 +138,52 @@ body, html {
             left: 20px;
             width: 50px; /* Adjust as needed */
         }
+        /* .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 100vw;
+           
+            
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            padding-left: 0px;
+            padding-right: 50px;
+            overflow: hidden; 
+            white-space: nowrap; 
+            border-right: .10em solid orange;
+            animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
+        } */
+
+
         .content {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
+            z-index: 2; /* Ensure content is above background and overlay */
         }
+
         h1 {
             font-size: 48px;
             margin-bottom: 20px;
+            display: inline-block;
+            animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: orange; }
         }
         .progress-bar-container {
             width: 100%;
@@ -112,11 +192,12 @@ body, html {
             margin: 20px auto;
             padding: 3px;
         }
+
         .progress-bar {
             width: 0;
             height: 20px;
             background-color: #f5a623;
-            border-radius: 20px;
+            border-radius: 4px;
             text-align: center;
             color: black;
             font-weight: bold;
@@ -129,6 +210,34 @@ body, html {
 
         .footer a {
             color: #f5a623;
+        }
+
+
+
+        /* New CSS for background image zoom */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('image/1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            z-index: 0; /* Place it behind other content */
+            animation: zoom 20s infinite;
+        }
+
+        @keyframes zoom {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
 
@@ -151,6 +260,18 @@ const totalDays = 40;
         progressBar.style.width = progressPercentage + '%';
         progressBar.textContent = Math.floor(progressPercentage) + '%';
 
+        // JavaScript for typewriter effect
+        const typewriter = document.getElementById('typewriter');
+        const texts = ['Construction', 'Development'];
+        let index = 0;
+
+        function switchText() {
+            index = (index + 1) % texts.length;
+            typewriter.textContent = texts[index];
+        }
+
+        // Switch text every 4 seconds
+        setInterval(switchText, 4000);
 
     </script>
 
